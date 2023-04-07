@@ -161,16 +161,16 @@ class Model(nn.Module):
         return y_pred
 
 
-def train_model(model, criterion, optimizer, scheduler, num_epochs=500):
+def train_model(model, criterion, optimizer, scheduler, epochs=500):
     since = time.time()
 
     best_model_wts = copy.deepcopy(model.state_dict())
     best_loss = 10.0
 
-    for epoch in range(num_epochs):
-        print('Epoch {}/{}'.format(epoch, num_epochs - 1))
+    for epoch in range(epochs):
+        print('Epoch {}/{}'.format(epoch, epochs - 1))
         print('-' * 10)
-        log.write('Epoch {}/{}\n'.format(epoch, num_epochs - 1))
+        log.write('Epoch {}/{}\n'.format(epoch, epochs - 1))
 
         # Each epoch has a training and validation phase
         train_loss = 0.0
@@ -255,7 +255,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--LR", type=float, default=0.001)
     parser.add_argument("--BATCH_SIZE", type=int, default=512)
-    parser.add_argument("--num_epochs", type=int, default=200)
+    parser.add_argument("--epochs", type=int, default=200)
     parser.add_argument("--step_size", type=int, default=150)
     parser.add_argument("--gamma", type=float, default=0.5)
     parser.add_argument("--radius", type=int, default=3)
@@ -266,7 +266,7 @@ if __name__ == '__main__':
 
     LR = args.LR
     BATCH_SIZE = args.BATCH_SIZE
-    num_epochs = args.num_epochs
+    epochs = args.epochs
     step_size = args.step_size
     gamma = args.gamma
     split_case = args.split_case
@@ -344,7 +344,7 @@ if __name__ == '__main__':
     print("start training model")
 
     model_ft = train_model(model_ft, criterion, optimizer_ft, exp_lr_scheduler,
-                           num_epochs=num_epochs)
+                           epochs=epochs)
 
 
     # model_ft.load_state_dict(torch.load("../log/pth/XXX.pth"))

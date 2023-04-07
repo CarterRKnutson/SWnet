@@ -28,9 +28,6 @@ additional_definitions = [
      'type': float,
      'help': 'learning rate'
      },
-    {'name': 'num_epochs',
-     'type': int
-     },
     {'name': 'step_size',
      'type': int
      },
@@ -221,16 +218,16 @@ class Model(nn.Module):
         return y_pred
 
 
-def train_model(model, train_loader, test_loader, dataset_sizes, criterion, optimizer, scheduler, output_dir, file_name, num_epochs=500):
+def train_model(model, train_loader, test_loader, dataset_sizes, criterion, optimizer, scheduler, output_dir, file_name, epochs=500):
     since = time.time()
 
     best_model_wts = copy.deepcopy(model.state_dict())
     best_loss = 10.0
 
-    for epoch in range(num_epochs):
-        print('Epoch {}/{}'.format(epoch, num_epochs - 1))
+    for epoch in range(epochs):
+        print('Epoch {}/{}'.format(epoch, epochs - 1))
         print('-' * 10)
-        log.info('Epoch {}/{}\n'.format(epoch, num_epochs - 1))
+        log.info('Epoch {}/{}\n'.format(epoch, epochs - 1))
 
         # Each epoch has a training and validation phase
         train_loss = 0.0
@@ -317,7 +314,7 @@ def run(gParameters):
     print(gParameters)
     LR = gParameters['lr']
     BATCH_SIZE = gParameters['batch_size']
-    num_epochs = gParameters['num_epochs']
+    epochs = gParameters['epochs']
     step_size = gParameters['step_size']
     gamma = gParameters['gamma']
     split_case = gParameters['split_case']
@@ -414,7 +411,7 @@ def run(gParameters):
     print("start training model")
 
     model_ft = train_model(model_ft, train_loader, test_loader, dataset_sizes, criterion, optimizer_ft, exp_lr_scheduler,
-                           output_dir, file_name, num_epochs=num_epochs)
+                           output_dir, file_name, epochs=epochs)
 
 
     mse, r2 = eval_model(model_ft, test_loader)

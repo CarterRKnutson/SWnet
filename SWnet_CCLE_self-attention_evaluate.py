@@ -30,9 +30,6 @@ additional_definitions = [
      'type': float,
      'help': 'learning rate'
      },
-    {'name': 'num_epochs',
-     'type': int
-     },
     {'name': 'step_size',
      'type': int
      },
@@ -242,7 +239,7 @@ def run(gParameters):
     print(gParameters)
     LR = gParameters['lr']
     BATCH_SIZE = gParameters['batch_size']
-    num_epochs = gParameters['num_epochs']
+    epochs = gParameters['epochs']
     step_size = gParameters['step_size']
     gamma = gParameters['gamma']
     split_case = gParameters['split_case']
